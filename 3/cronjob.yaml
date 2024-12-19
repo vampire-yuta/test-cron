@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-world-3
+spec:
+  schedule: "*/5 * * * *"  # 5分ごとに実行
+  suspend: false  # ジョブの実行を停止
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - echo "Hello, World!"
+          restartPolicy: OnFailure
